@@ -123,8 +123,11 @@ export const generateQuestions = async (config: Config, counts: QuestionCounts):
     });
 
     try {
-        const jsonText = response.text.trim();
-        const parsedJson = JSON.parse(jsonText);
+        const jsonText = response.text;
+        if (typeof jsonText !== 'string') {
+            throw new Error("The AI response did not contain valid text content.");
+        }
+        const parsedJson = JSON.parse(jsonText.trim());
         return parsedJson as Paper;
     } catch (e) {
         console.error("Failed to parse JSON response:", response.text);
