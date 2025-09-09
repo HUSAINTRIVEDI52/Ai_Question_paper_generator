@@ -6,6 +6,7 @@ import Header from './components/Header';
 import ConfiguratorForm from './components/ConfiguratorForm';
 import PaperPreview from './components/PaperPreview';
 import PreviewPlaceholder from './components/PreviewPlaceholder';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const [config, setConfig] = useState<Config>(INITIAL_CONFIG);
@@ -87,9 +88,9 @@ const App: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-gray-800">
+    <div className="min-h-screen bg-slate-50 font-sans text-gray-800 flex flex-col">
       <Header />
-      <main className="p-4 sm:p-6 lg:p-8">
+      <main className="p-4 sm:p-6 lg:p-8 flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           <div className="no-print">
             <ConfiguratorForm
@@ -118,6 +119,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
