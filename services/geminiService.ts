@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Config, Paper, QuestionCounts } from "../types";
 
-// FIX: Per coding guidelines, API key must be from `process.env.API_KEY` and is assumed to be present.
+// Fix: Per coding guidelines, initialize GoogleGenAI with process.env.API_KEY.
+// This resolves the error and aligns with the project's API key handling strategy.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const getResponseSchema = (counts: QuestionCounts) => {
