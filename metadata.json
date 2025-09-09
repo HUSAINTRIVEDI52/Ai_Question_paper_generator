@@ -1,0 +1,5 @@
+{
+  "name": "AI Question Paper Generator",
+  "description": "An application for tutors to generate question papers for GSEB classes 5–10. It allows customization of question formats, difficulty levels, subjects, and more, using AI to generate the questions.",
+  "requestFramePermissions": []
+}
