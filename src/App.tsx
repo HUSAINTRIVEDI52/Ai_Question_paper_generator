@@ -14,6 +14,10 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const availableSubjects = useMemo(() => {
+    return Object.keys(CHAPTERS[config.standard]?.[config.medium] || {});
+  }, [config.standard, config.medium]);
+
   const availableChapters = useMemo(() => {
     return CHAPTERS[config.standard]?.[config.medium]?.[config.subject] || [];
   }, [config.standard, config.subject, config.medium]);
@@ -26,7 +30,15 @@ const App: React.FC = () => {
     setConfig(prevConfig => {
       const newConfig = { ...prevConfig, [field]: value };
 
-      if (field === 'standard' || field === 'subject' || field === 'medium') {
+      if (field === 'standard' || field === 'medium') {
+        const newAvailableSubjects = Object.keys(CHAPTERS[newConfig.standard]?.[newConfig.medium] || {});
+        if (!newAvailableSubjects.includes(newConfig.subject)) {
+          newConfig.subject = newAvailableSubjects[0] || '';
+        }
+        newConfig.chapter = [];
+      }
+      
+      if (field === 'subject') {
         newConfig.chapter = [];
       }
       
@@ -86,6 +98,7 @@ const App: React.FC = () => {
               onChapterChange={handleChapterChange}
               questionCounts={questionCounts}
               onCountsChange={handleCountsChange}
+              availableSubjects={availableSubjects}
               availableChapters={availableChapters}
               onGenerate={handleGeneratePaper}
               isLoading={isLoading}

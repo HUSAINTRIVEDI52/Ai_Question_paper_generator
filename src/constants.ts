@@ -1,7 +1,6 @@
 import { Config, QuestionCounts } from './types';
 
 export const STANDARDS = ['5', '6', '7', '8', '9', '10'];
-export const SUBJECTS = ['Maths', 'Science', 'English', 'Gujarati', 'Social Science'];
 export const MEDIUMS = ['English', 'Gujarati'];
 export const DIFFICULTIES: ['Easy', 'Medium', 'Hard'] = ['Easy', 'Medium', 'Hard'];
 

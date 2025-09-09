@@ -1,6 +1,6 @@
 import React from 'react';
 import { Config, QuestionCounts } from '../types';
-import { STANDARDS, SUBJECTS, MEDIUMS, DIFFICULTIES } from '../constants';
+import { STANDARDS, MEDIUMS, DIFFICULTIES } from '../constants';
 import { ButtonSpinnerIcon } from './icons/SpinnerIcon';
 import ChapterSelector from './ChapterSelector';
 import { InfoIcon } from './icons/InfoIcon';
@@ -11,6 +11,7 @@ interface ConfiguratorFormProps {
   onChapterChange: (chapters: string[]) => void;
   questionCounts: QuestionCounts;
   onCountsChange: (type: keyof QuestionCounts, value: number) => void;
+  availableSubjects: string[];
   availableChapters: string[];
   onGenerate: () => void;
   isLoading: boolean;
@@ -48,7 +49,7 @@ const SectionHeader: React.FC<{ title: string; children?: React.ReactNode }> = (
 );
 
 
-const ConfiguratorForm: React.FC<ConfiguratorFormProps> = ({ config, onConfigChange, onChapterChange, questionCounts, onCountsChange, availableChapters, onGenerate, isLoading, totalQuestions }) => {
+const ConfiguratorForm: React.FC<ConfiguratorFormProps> = ({ config, onConfigChange, onChapterChange, questionCounts, onCountsChange, availableSubjects, availableChapters, onGenerate, isLoading, totalQuestions }) => {
   const isOverLimit = totalQuestions > 30;
   
   return (
@@ -67,7 +68,7 @@ const ConfiguratorForm: React.FC<ConfiguratorFormProps> = ({ config, onConfigCha
         <SectionHeader title="2. Question Paper Configuration" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <SelectField label="Standard" id="standard" value={config.standard} onChange={(e) => onConfigChange('standard', e.target.value)} options={STANDARDS} />
-          <SelectField label="Subject" id="subject" value={config.subject} onChange={(e) => onConfigChange('subject', e.target.value)} options={SUBJECTS} />
+          <SelectField label="Subject" id="subject" value={config.subject} onChange={(e) => onConfigChange('subject', e.target.value)} options={availableSubjects} />
           <SelectField label="Medium" id="medium" value={config.medium} onChange={(e) => onConfigChange('medium', e.target.value)} options={MEDIUMS} />
           <SelectField label="Difficulty" id="difficulty" value={config.difficulty} onChange={(e) => onConfigChange('difficulty', e.target.value as 'Easy' | 'Medium' | 'Hard')} options={DIFFICULTIES} />
         </div>
