@@ -19,7 +19,6 @@ const App: React.FC = () => {
   }, [config.standard, config.subject, config.medium]);
 
   const totalQuestions = useMemo(() => {
-    // Fix: Explicitly type the accumulator and value in the reduce function to prevent type inference issues.
     return Object.values(questionCounts).reduce((sum: number, count: number) => sum + count, 0);
   }, [questionCounts]);
 
