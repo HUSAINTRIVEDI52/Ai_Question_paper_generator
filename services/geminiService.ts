@@ -1,9 +1,13 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Config, Paper, QuestionCounts } from "../types";
 
-// Fix: Per coding guidelines, initialize GoogleGenAI with process.env.API_KEY.
-// This resolves the error and aligns with the project's API key handling strategy.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const API_KEY = process.env.API_KEY;
+
+if (!API_KEY) {
+  throw new Error("Missing Google Gemini API Key. Please set VITE_API_KEY in your .env file.");
+}
+
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 const getResponseSchema = (counts: QuestionCounts) => {
     const properties: any = {};
